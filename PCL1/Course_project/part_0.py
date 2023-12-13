@@ -84,27 +84,33 @@ def sentiment_extraction(file_path):
     return{"Sentiments Expressions": sentiments_list}
 
 def main():
-    text_files_sentiments = [r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Alice_in_WOnderland",
-                            r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Pride_and_Prejudice",
-                            r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\The_Count_of_Monte_Cristo"]
+    """
+    get the amount of books to make a loop to get the corresponding paths for the functions above
+    """
     
-    output_dir_sentiments = [r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Alice_in_WOnderland\results",
-                            r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Pride_and_Prejudice",
-                            r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\The_Count_of_Monte_Cristo"]
-    
-    text_files_NER = [r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Alice_in_WOnderland",
-                      r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Pride_and_Prejudice",
-                      r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\The_Count_of_Monte_Cristo"]
-    
-    output_dir_NER = [r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Alice_in_WOnderland",
-                      r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\Pride_and_Prejudice",
-                      r"C:\Users\babus\OneDrive\Documents\uni uzh\compling\pcl\pcl1-course-project-master\The_Count_of_Monte_Cristo"]
-    
-    # Here you may add the neccessary code to call your functions, and all the steps before, in between, and after calling them.
-    for i in range(len(text_files_sentiments)):
-        json_maker(text_files_sentiments[i], output_dir_sentiments[i])
-        json_maker(text_files_NER[i], output_dir_NER[i])
-    print("all done!")
+    try:
+        amount = int(input("Enter the amount of books to be analyzed: "))
+    except:
+        print("Pls enter a number!")
+        exit(1)
+    if amount <= 0:
+        print("Please enter a positive number!")
+        exit(1)
+  
+    for i in range(0, amount):
+        book_title = input("Enter the name of the book")
+        try:
+            input_path_sentiments = str(input(f"Enter the file path for book '{book_title}' with the folder containing the sentiment files to be transformed:  "))
+            output_path_sentiments = str(input(f"Enter the file path for book '{book_title}' with the folder for the output of sentiments files:  "))
+            json_maker(input_path_sentiments, output_path_sentiments)
+            input_path_NER = str(input(f"Enter the file path for book '{book_title}' with the folder containing the NER files to be transformed:  "))
+            output_path_NER= str(input(f"Enter the file path for book '{book_title}' with the folder for the output of NER files:  "))
+            json_maker(input_path_NER, output_path_NER)
+            print("all done!")
+        except:
+            print("Incorrect input")
+            exit(1)
+
 
 # This is the standard boilerplate that calls the main() function when the program is executed.
 if __name__ == '__main__':
