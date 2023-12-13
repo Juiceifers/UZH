@@ -1,0 +1,22 @@
+Analysis process for the PCL1 Course Project Part 0:
+Group Members: Ishana Rana, Sofia Benitez Navarro
+
+A) Selection of 3 books:
+With the help of Chatgpt we had selected the following books:
+- Alice in Wonderland
+- Pride and Prejudice
+- The Count of Monte Carlo
+
+B) ENhancing the Cleanup Script:
+- this file can be run with the following command in the terminal: 
+    python gutenberg_cleanup.py <file_tobecleaned_path.txt>
+- it checks that the input is correct. Then with the given info it creates the necessary folders and produces the cleaned text.
+- The folder and cleaned text creation seems to work but the produced folders of "Chapters" seem to be empty. We tried to find the bug for so long but could not make it in time. This also made things more difficult for the following tasks as we could not really test our code. But with the help of some friends and our own samplin we were able to at least write some code (that makes sense to us lmao)
+- Update: We think we know where the bug is - it has to do with the grep search we think, we implemented it incorrectly. We should have defined the capitalized words, names, sentiments seperately in a different file. But unfortunately, its too late now:(
+
+C) Chapter-Based Sentiment and Entity Analysis
+- as mentioned we were not able to fully test our code and see the output results as the chapter creation did not fully work. 
+- But this was our thought process:
+    1) With input from the command line we would first get the information of how many books one wants to filter.
+    2) with the help of a for loop for each book, the path for the corresponding files are asked thru input from the command line. WIth this information the function of json_maker() is called which shall first filter out either the sentiments or NER depending on the indicator and then transform that into json file
+
