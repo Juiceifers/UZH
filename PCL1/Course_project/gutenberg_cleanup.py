@@ -158,7 +158,7 @@ def split_book_by_chapter(cleaned, book_title):
     # 2) splitting the chapters and creating seperate folders for it
     chapter_num = 0
     for i in chapters:
-        chapter_name = i.split() #to filter out the empty spaces - creates list with names and the empty spaces
+        chapter_name = i.strip() #to filter out the empty spaces - creates list with names and the empty spaces
         if chapter_name: #if its not just empty
             chapter_num+= 1
             file_name = os.path.join(book_title, "Chapters", f"chapter_{chapter_num}.txt")
