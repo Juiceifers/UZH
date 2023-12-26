@@ -1,5 +1,9 @@
 *A) LEARNING AND CHALLENGES* 
+NLP offers a more advanced analysis and is therefore used for more complex tasks, like the one in this project. One of the main differences might be that "grep" has no semantic understanding at all, while NLP is capable of extracting information like named entities and semantiment analysis. 
 
+Key learning includes the usage of sapcy in general and for named entities especially, which took a lot of research, time and effort. Additionally, the technique for arranging the list and dictionaries in the way it was predefined was challenging. 
+
+The biggest challenge might have been writing the code for identifying the names and their aliases, which still has a large margin of error. We tried several different codes for that particular task, and finally chose one of them, optimizing the number of clustering groups for the best results.
 
 
 *B) ANALYSIS INSIGHTS AND REAL-WORLD APPLICABILITY*
