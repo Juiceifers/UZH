@@ -28,7 +28,4 @@ def levenshtein(a: str | list[str], b: str | list[str], insertion_cost=1, deleti
 
     return dp_matrix[n][m]
 
-def test_invalid_inputs():
-    s1 = "I am not able to find my gold necklace."
-    s2 = "I am just not able to find my shiny gold necklace."
     
