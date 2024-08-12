@@ -1,0 +1,25 @@
+name: Auto Sync to GitHub
+
+on:
+  push:
+    branches:
+      - main  # Or your default branch
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "Juiceifers"
+        git config user.email "ishana.rana@gmail.com"
+
+    - name: Commit and Push changes
+      run: |
+        git add .
+        git commit -m "Automated commit by GitHub Actions"
+        git push origin main
