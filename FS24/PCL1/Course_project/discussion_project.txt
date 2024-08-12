@@ -1,0 +1,21 @@
+*A) LEARNING AND CHALLENGES* 
+NLP offers a more advanced analysis and is therefore used for more complex tasks, like the one in this project. One of the main differences might be that "grep" has no semantic understanding at all, while NLP is capable of extracting information like named entities and semantiment analysis. 
+
+Key learning includes the usage of sapcy in general and for named entities especially, which took a lot of research, time and effort. Additionally, the technique for arranging the list and dictionaries in the way it was predefined was challenging. 
+
+The biggest challenge might have been writing the code for identifying the names and their aliases, which still has a large margin of error. We tried several different codes for that particular task, and finally chose one of them, optimizing the number of clustering groups for the best results.
+
+
+*B) ANALYSIS INSIGHTS AND REAL-WORLD APPLICABILITY*
+Even though we did not suceed to implement everything, we could see the power and possibilities with these tools.
+With the use of spacy and nltk we could make connections between characters and events apparent. They allowed us to delve deeper into the underlying themes and relationships within the plot. Especially if we could have visualized them and observed the patterns over the plotline. 
+While grep provided a basic overview, spaCy and NLTK significantly improved our ability to extract and interpret contextual information. For instance, named entity recognition facilitated the identification of key characters and locations, enriching the analysis with a level of detail that grep alone could not achieve
+
+These functionalities and abilities are very well transferable to social media analysis. 
+Sentiment analysis could be employed to gauge public opinion on literary trends, and tracking narrative elements in real-time social media discussions would offer valuable insights into evolving storylines and audience engagement. Or even dealing with abusive/racist/"unethical" remarks and movements online. This is of very big importance as almost everyone is online generating and consuming (written) content.
+Another field with great potential could be applications in comparative literature studies. Analyzing plot structures, character development, and thematic elements across various genres and authors could open new avenues for literary scholars to gain deeper insights into the evolution of storytelling techniques.
+
+*FEEDBACK*
++ We were genuinely impressed with the project concept; it proved to be both engaging and hands-on, making the learning experience highly enjoyable.
+- While we appreciated the progressive structure of the exercises, we encountered some challenges as they built upon each other. Given the complexity of the project, it became crucial to fully grasp and implement each aspect from the outset. Offering optional functionalities for certain tasks could have been beneficial, allowing us to proceed smoothly even if we faced difficulties with a specific part.
+- Additionally, completing the project before the break and reserving the last lecture/tutorial for comprehensive discussions would have been ideal. This approach would have provided us with a more focused and productive environment for reviewing and clarifying any queries.
