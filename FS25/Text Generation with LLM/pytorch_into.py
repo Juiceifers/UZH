@@ -1,10 +1,10 @@
 # ANSI color codes:
 PINK = "\033[1;35m"
 RESET = "\033[0m"
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 # 1)
 import torch
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 # 2)
 x1 = torch.tensor([3,7,2,9,1])
 x2 = torch.tensor([[1,4,7],[2,5,8],[3,6,9]])
@@ -17,7 +17,7 @@ for x in vectors:
     print(f"The vector is:\n{x}")
     print(f"and its shape is {x.shape}\n")
 
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 # 3)
 print(f"{PINK}Solutions for task 3: {RESET}")
 print(f"{PINK}a) {RESET}")
@@ -56,6 +56,7 @@ argmax_B = B.argmax()
 argmin_B = B.argmin()
 print(f"For Matrix B:\nMax val:\t{max_B}\nMin val:\t{min_B}\nArgmax val:\t{argmax_B}\nArgmin val:\t{argmin_B}\n")
 
+#-------------------------------------------------------------------------------------------------------------------------------------
 print(f"{PINK}Solutions for task 4: {RESET}")
 T = torch.tensor([[10, 20, 30], [40, 50, 60], [70, 80, 90]])
 sum_T = T.sum()
@@ -68,7 +69,7 @@ argmax_row_T = T.argmax(dim=1)
 argmin_row_T = T.argmin(dim=1)
 print(f"{PINK}c){RESET}\nIndices of max values along each row:\t{argmax_row_T}\nIndices of min values along each row:\t{argmin_row_T}\n")
 
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 print(f"{PINK}Solutions for task 5: {RESET}")
 
 X = torch.tensor([0.1, 0.6, 0.8, 0.3, 0.9, 0.4])
