@@ -1,0 +1,109 @@
+import re
+
+PINK = "\033[1;35m"
+RESET = "\033[0m"
+CYAN = "\033[1;36m"
+
+def preprocess(text: str) -> str:
+    """
+    "Markov’s sample comprised the first 20,000 letters of the poem, which is about an eighth of the total. He eliminated all punctuation and white space, jamming the characters into one long, unbroken sequence."
+    """
+    cleaned = re.sub(r'[\W\d_]+',"", text) 
+    cleaned_short = cleaned[0:20000]
+    #print(cleaned_short.lower()[0:100])
+    return cleaned_short.lower()
+
+
+class MarkovLM:
+    VOWELS = "aeiouàäèéêëîïôöùûü"
+
+    def __init__(self):
+        self.num_v = None
+        self.num_c = None
+        self.p_v = None
+        self.p_c = None
+        self.num_vv = None
+        self.num_vc = None
+        self.num_cv = None
+        self.num_cc = None
+        self.p_v_given_v = None
+        self.p_c_given_v = None
+        self.p_v_given_c = None
+        self.p_c_given_c = None
+
+    
+    def train(self, training_corpus: str):
+        text = preprocess(training_corpus)
+
+        self.num_v = len(re.findall(f"[{self.VOWELS}]", text))
+        self.num_c = len(text)-self.num_v
+
+        self.p_c = self.num_v/len(text)
+        self.p_v = self.num_c/len(text)
+
+        # counting bigram patterns vv, vc, cv and cc
+        self.num_vv, self.num_vc, self.num_cv, self.num_cc, bigrams = 0, 0, 0, 0, 0
+        for i in range(1,len(text)):
+            if text[i] in self.VOWELS:
+                if text[i-1] in self.VOWELS:
+                    self.num_vv += 1
+                else:
+                    self.num_cv += 1
+            else:
+                if text[i-1] in self.VOWELS:
+                    self.num_vc += 1
+                else:
+                    self.num_cc += 1
+            bigrams += 1
+
+        self.p_v_given_v = self.num_vv/bigrams
+        self.p_c_given_v = self.num_vc/bigrams
+        self.p_v_given_c = self.num_cv/bigrams
+        self.p_c_given_c = self.num_cc/bigrams
+
+    def generate(self, context: str) -> str:
+        prev_letter = context[-2]
+        if prev_letter in self.VOWELS:
+            if self.p_v_given_v > self.p_c_given_v:
+                context+= "v"
+            else:
+                context += "c"
+        else:
+            if self.p_v_given_c > self.p_c_given_c:
+                context += "v"
+            else:
+                context += "c"
+        return context
+
+
+if __name__ == '__main__':
+    with open(r"onegin.txt", "r", encoding="utf-8") as f:
+        text = f.read()
+    model = MarkovLM()
+    model.train(text)
+
+    print("Resulting Counts and Probabilities vs expected values:")
+    print(f"Vowel count:\t\t{PINK}{model.num_v}{RESET}\t{CYAN}7788{RESET}")
+    print(f"Consonant count:\t{PINK}{model.num_c}{RESET}\t{CYAN}12212{RESET}")
+    print(f"p(v):\t\t\t{PINK}{model.p_v}{RESET}\t{CYAN}0.389{RESET}")
+    print(f"p(c):\t\t\t{PINK}{model.p_c}{RESET}\t{CYAN}0.611{RESET}")
+    print(f"VV count:\t\t{PINK}{model.num_vv}{RESET}\t{CYAN}1365{RESET}")
+    print(f"VC count:\t\t{PINK}{model.num_vc}{RESET}\t{CYAN}6423{RESET}")
+    print(f"CV count:\t\t{PINK}{model.num_cv}{RESET}\t{CYAN}6423{RESET}")
+    print(f"CC count:\t\t{PINK}{model.num_cc}{RESET}\t{CYAN}5788{RESET}")
+    print(f"p(v | v):\t\t{PINK}{round(model.p_v_given_v, 3)}{RESET}\t{CYAN}0.175{RESET}")
+    print(f"p(c | v):\t\t{PINK}{round(model.p_c_given_v, 3)}{RESET}\t{CYAN}0.825{RESET}")
+    print(f"p(v | c):\t\t{PINK}{round(model.p_v_given_c, 3)}{RESET}\t{CYAN}0.526{RESET}")
+    print(f"p(c | c):\t\t{PINK}{round(model.p_c_given_c, 3)}{RESET}\t{CYAN}0.474{RESET}")
+
+    prefix = "vvcvc"
+    reps = 6
+    print(f"\nFor the prefix {prefix} the next {reps} token added would be:")
+    for i in range(1,reps+1):
+        new_word = model.generate(prefix)
+        token = new_word[-1]
+        print(f"{i}. added token to {prefix}{PINK}{token}{RESET}")
+        prefix += str(token)
+    
+
+
